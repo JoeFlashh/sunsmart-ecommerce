@@ -1,14 +1,15 @@
 import { LuSettings2 } from "react-icons/lu";
 
-function FiltersAndSort() {
+//
+
+function FiltersAndSort({ toggleDrawer }) {
   return (
     <>
       {/* Type filter */}
-      <button className="filter-button">
+      <button className="filter-button" onClick={toggleDrawer}>
         <LuSettings2 className="filter-icon" />
         Filters
       </button>
-
       {/* Sort button */}
       <div className="sort-select-container">
         <label htmlFor="sort-select">

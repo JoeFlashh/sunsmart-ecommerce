@@ -4,18 +4,20 @@ import CartPage from "./pages/CartPage";
 
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <>
+    <div className="site-container">
       <Navbar />
-      <main>
+      <main className="site-content">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/cart" element={<CartPage />} />
         </Routes>
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }
 

@@ -1,16 +1,18 @@
 import { LuSettings2 } from "react-icons/lu";
 import { MdClose } from "react-icons/md";
 
-function FiltersDrawer() {
+//
+
+function FiltersDrawer({ isOpen, onClose }) {
   return (
-    <div className="filters-drawer">
+    <div className={`filters-drawer ${isOpen ? "open" : ""}`}>
       <div className="filters-drawer-header">
         <div className="filters-drawer-header-flex">
           <p>
             <LuSettings2 className="drawer-icon" />
             Filters
           </p>
-          <button className="drawer-button">
+          <button className="drawer-button" onClick={onClose}>
             <MdClose />
           </button>
         </div>
@@ -36,7 +38,7 @@ function FiltersDrawer() {
         </label>
         <label>
           <input type="checkbox" name="spf" value="50" />
-          <span>SPF 50+</span>
+          <span>SPF 50</span>
         </label>
       </div>
       {/* Thirid filter group */}
