@@ -1,19 +1,28 @@
-interface Product {
-  id: number;
-  name: string;
-  type: "mineral" | "chemical";
-  spf: number;
-  reefSafe: boolean;
-  price: number;
-  image: string;
+interface ProductCardProps {
+  product: Product;
+  isNew: boolean;
 }
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product, isNew }: ProductCardProps) {
   return (
     <>
       <div className="product-card">
         <div className="product-card-image-container">
-          <img src={product.image} alt="product image" />
+          <img
+            src={product.defaultImage}
+            alt={product.name}
+            className="default-image"
+          />
+          <img
+            src={product.hoverImage}
+            alt={product.name}
+            className="hover-image"
+          />
+          {isNew && (
+            <div className="sort-badge-isNew">
+              <p>New</p>
+            </div>
+          )}
         </div>
         <div className="product-card-info-container">
           <h3>{product.name}</h3>

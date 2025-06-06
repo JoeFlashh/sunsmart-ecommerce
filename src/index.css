@@ -26,6 +26,8 @@ button {
   cursor: pointer;
   font-size: inherit;
   border-radius: 4px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 img {
@@ -41,4 +43,38 @@ img {
 }
 .site-content {
   flex-grow: 1;
+}
+
+/* Remove the grayish tap highlight on links, buttons, inputs in WebKit browsers */
+a,
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent; /* disables gray highlight on tap/click */
+}
+
+/* Remove background on active/focus states on buttons & links in WebKit */
+button:focus,
+button:active,
+a:focus,
+a:active {
+  background-color: transparent !important;
+  outline: none;
+}
+
+/* Add a consistent custom focus style (you can tweak the color) */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  background-color: transparent;
+  outline: none;
+}
+
+/* Optional: For inputs with user-agent backgrounds */
+input:focus,
+textarea:focus {
+  background-color: transparent;
 }
