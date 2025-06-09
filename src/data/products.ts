@@ -20,7 +20,7 @@ import tealHoverImg from "../assets/images/tealHoverImg.png";
 import whiteHoverImg from "../assets/images/whiteHoverImg.png";
 import yellowHoverImg from "../assets/images/yellowHoverImg.png";
 
-interface Product {
+export interface Product {
   id: number;
   name: string;
   type: "mineral" | "chemical";

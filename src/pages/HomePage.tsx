@@ -30,15 +30,6 @@ function HomePage() {
     return 0;
   });
 
-  // const newestProducts = [...products].sort(
-  //   (a, b) =>
-  //     new Date(b.releaseDate).getTime() -
-  //     new Date(a.releaseDate)
-  //       .getTime()
-  //       .slice(0, 2)
-  //       .map((product) => product.id)
-  // );
-
   const newestProducts = [...products]
     .sort(
       (a, b) =>

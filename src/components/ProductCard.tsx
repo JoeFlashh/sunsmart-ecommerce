@@ -1,3 +1,5 @@
+import type { Product } from "../data/products";
+
 interface ProductCardProps {
   product: Product;
   isNew: boolean;
