@@ -3,7 +3,12 @@ import { MdClose } from "react-icons/md";
 
 //
 
-function FiltersDrawer({ isOpen, onClose }) {
+interface FiltersDrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+function FiltersDrawer({ isOpen, onClose }: FiltersDrawerProps) {
   return (
     <div className={`filters-drawer ${isOpen ? "open" : ""}`}>
       <div className="filters-drawer-header">
