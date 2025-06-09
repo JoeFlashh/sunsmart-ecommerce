@@ -4,7 +4,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 
 function Navbar() {
-  const cartItemCount = 3;
+  const cartItemCount = 0;
 
   return (
     <header className="navbar-outer-container">

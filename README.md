@@ -3,8 +3,6 @@
 A React + TypeScript **fictitious** e-commerce app for sunscreen products, built with Vite.  
 Features product listing, sorting, and filtering.
 
----
-
 ## Tools
 
 - React
@@ -14,8 +12,6 @@ Features product listing, sorting, and filtering.
 - React Router for navigation
 - React Icons
 
----
-
 ## Features
 
 - Browse a list of sunscreens with product images and details
@@ -24,8 +20,6 @@ Features product listing, sorting, and filtering.
 - Responsive UI with cart icon showing item count
 - Filters available via a drawer UI
 - Type-safe components and props with TypeScript
-
----
 
 ## Project Status
 
