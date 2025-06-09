@@ -77,4 +77,5 @@ textarea:focus-visible {
 input:focus,
 textarea:focus {
   background-color: transparent;
+  -webkit-tap-highlight-color: transparent; /* disables gray highlight on tap/click */
 }
