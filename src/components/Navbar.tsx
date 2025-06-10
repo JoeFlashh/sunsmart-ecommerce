@@ -1,4 +1,3 @@
-// import { AiOutlineShoppingCart } from "react-icons/ai";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 
 import { Link } from "react-router-dom";

@@ -1,7 +1,6 @@
 import { LuSettings2 } from "react-icons/lu";
 import { MdClose } from "react-icons/md";
-
-//
+import Button from "@mui/material/Button";
 
 interface FiltersDrawerProps {
   isOpen: boolean;
@@ -17,9 +16,23 @@ function FiltersDrawer({ isOpen, onClose }: FiltersDrawerProps) {
             <LuSettings2 className="drawer-icon" />
             Filters
           </p>
-          <button className="drawer-button" onClick={onClose}>
+          <Button
+            disableRipple
+            variant="text"
+            sx={{
+              minWidth: 0,
+              padding: 0,
+              color: "inherit",
+              fontSize: "1.5rem",
+              "&.Mui-focusVisible": {
+                outline: "2px solid #333",
+                outlineOffset: "2px",
+              },
+            }}
+            onClick={onClose}
+          >
             <MdClose />
-          </button>
+          </Button>
         </div>
       </div>
       {/* First filter group */}

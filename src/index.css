@@ -11,32 +11,10 @@ body {
   font-family: sans-serif;
   color: #333;
   line-height: 1.5;
-  height: 100%; /* useful fallback */
+  height: 100%;
 }
 
-ul,
-ul li,
-a {
-  list-style-type: none;
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  cursor: pointer;
-  font-size: inherit;
-  border-radius: 4px;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-img {
-  width: 100%;
-  display: block;
-  height: auto;
-}
-
+/* Keeps footer at the bottom */
 .site-container {
   display: flex;
   flex-direction: column;
@@ -46,40 +24,18 @@ img {
   flex-grow: 1;
 }
 
-/* Remove the grayish tap highlight on links, buttons, inputs in WebKit browsers */
-a,
-button,
-input,
-select,
-textarea {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: none;
+/* ------------------------------------- */
+
+ul,
+ul li,
+a {
+  list-style-type: none;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Remove background on active/focus states on buttons & links in WebKit */
-button:focus,
-button:active,
-a:focus,
-a:active {
-  background-color: transparent !important;
-  background-color: none !important;
-  outline: none;
-}
-
-/* Add a consistent custom focus style (you can tweak the color) */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  background-color: transparent;
-  outline: none;
-}
-
-/* Optional: For inputs with user-agent backgrounds */
-input:focus,
-textarea:focus {
-  background-color: transparent;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: none;
+img {
+  width: 100%;
+  display: block;
+  height: auto;
 }

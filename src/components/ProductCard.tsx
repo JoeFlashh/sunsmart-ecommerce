@@ -1,4 +1,5 @@
 import type { Product } from "../data/products";
+import Button from "@mui/material/Button";
 
 interface ProductCardProps {
   product: Product;
@@ -30,7 +31,28 @@ function ProductCard({ product, isNew }: ProductCardProps) {
           <h3>{product.name}</h3>
           <p>Reef Safe: {product.reefSafe ? "Yes" : "No"}</p>
           <p>${product.price.toFixed(2)}</p>
-          <button className="product-card-button">Add to cart</button>
+          <Button
+            disableRipple
+            variant="outlined"
+            sx={{
+              textTransform: "none",
+              fontSize: "1rem",
+              color: "inherit",
+              width: "100%",
+              backgroundColor: "transparent",
+              border: "1px solid #333",
+              "&:hover": {
+                backgroundColor: "#333",
+                color: "#fff",
+              },
+              "&.Mui-focusVisible": {
+                outline: "2px solid #333",
+                outlineOffset: "2px",
+              },
+            }}
+          >
+            Add to cart
+          </Button>
         </div>
       </div>
     </>
