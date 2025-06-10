@@ -7,7 +7,7 @@ Features product listing, sorting, and filtering.
 
 - React
 - TypeScript
-- CSS
+- MUI
 - Vite
 - React Router for navigation
 - React Icons
