@@ -1,7 +1,6 @@
 # Sunsmart Store
 
-A React + TypeScript **fictitious** e-commerce app for sunscreen products, built with Vite.  
-Features product listing, sorting, and filtering.
+A React + TypeScript **fictitious** e-commerce app for sunscreen products, built with Vite. Features product listing, sorting, and filtering.
 
 ## Tools
 
