@@ -291,11 +291,14 @@ img {
 }
 .clear-apply-filters-buttons-container button {
   width: 100%;
-  background-color: transparent;
   border: 1px solid #333;
   padding: 0.5rem;
   font-size: inherit;
   font-weight: bold;
+}
+.clear-apply-filters-buttons-container button:nth-child(1) {
+  background-color: transparent;
+  color: inherit;
 }
 .clear-apply-filters-buttons-container button:nth-child(2) {
   background-color: #333;
@@ -341,6 +344,7 @@ img {
 }
 
 .add-to-cart-button {
+  color: inherit;
   padding: 0.75rem 0rem;
   font-size: inherit;
   font-weight: bold;
