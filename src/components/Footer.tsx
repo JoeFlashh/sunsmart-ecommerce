@@ -1,8 +1,8 @@
 function Footer() {
   return (
-    <section className="footer-container">
+    <div className="footer-container">
       <p>&copy; {new Date().getFullYear()} Sunsmart. All rights reserved.</p>
-    </section>
+    </div>
   );
 }
 

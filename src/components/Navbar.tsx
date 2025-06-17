@@ -6,7 +6,7 @@ function Navbar() {
   const cartItemCount = 0;
 
   return (
-    <header className="navbar-outer-container">
+    <div className="navbar-outer-container">
       <nav className="navbar-inner-container">
         <Link to="/">
           <p className="sunsmart-title">Sunsmart</p>
@@ -20,7 +20,7 @@ function Navbar() {
           </Link>
         </div>
       </nav>
-    </header>
+    </div>
   );
 }
 
