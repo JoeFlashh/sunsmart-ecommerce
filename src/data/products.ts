@@ -32,7 +32,7 @@ export interface Product {
 const products: Product[] = [
   {
     id: 1,
-    name: "Ohau Gold Special Mineral SPF 50",
+    name: "O'ahu Sand Mineral SPF 50",
     type: "mineral",
     spf: 50,
     reefSafe: true,
@@ -42,7 +42,7 @@ const products: Product[] = [
   },
   {
     id: 2,
-    name: "JBay special Chemical SPF 30",
+    name: "Tide turner Chemical SPF 30",
     type: "chemical",
     spf: 30,
     reefSafe: false,
@@ -73,7 +73,7 @@ const products: Product[] = [
   },
   {
     id: 5,
-    name: "Beach Bliss Mineral SPF 50",
+    name: "Turtle Bay Mineral SPF 50",
     type: "mineral",
     spf: 50,
     reefSafe: true,
@@ -83,7 +83,7 @@ const products: Product[] = [
   },
   {
     id: 6,
-    name: "Tide Turner Chemical SPF 50",
+    name: "Beach Bliss Chemical SPF 50",
     type: "chemical",
     spf: 50,
     reefSafe: false,
