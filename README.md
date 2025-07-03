@@ -1,8 +1,6 @@
-# Sunsmart Store
+# E-commerce UI
 
-**Sunsmart Store** is a fictitious e-commerce frontend app for browsing sunscreen products. Built with **React**, **TypeScript**, and **Vite**, it features a responsive UI, filtering via a drawer, and dynamic product listing behavior.
-
-## Tech Stack
+## Tools
 
 - React
 - TypeScript
