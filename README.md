@@ -1,32 +1,55 @@
 # Sunsmart Store
 
-A React + TypeScript **fictitious** e-commerce app for sunscreen products, built with Vite. Features product listing, sorting, and filtering.
+**Sunsmart Store** is a fictitious e-commerce frontend app for browsing sunscreen products. Built with **React**, **TypeScript**, and **Vite**, it features a responsive UI, filtering via a drawer, and dynamic product listing behavior.
 
-## Tools
+---
+
+## Tech Stack
 
 - React
 - TypeScript
-- MUI
 - Vite
-- React Router for navigation
-- React Icons
+- React Router
+
+---
 
 ## Features
 
-- Browse a list of sunscreens with product images and details
-- Sort products by newest release date or price (low to high / high to low)
-- Filter products by type, SPF, and reef-safe options
-- Responsive UI with cart icon showing item count
-- Filters available via a drawer UI
-- Type-safe components and props with TypeScript
+- **Product Catalog**: View a list of sunscreen products with images, prices, SPF, and reef-safe labels.
+- **Drawer-Based Filters**:
+  - Filter by Type: Mineral or Chemical
+  - Filter by SPF: 30 or 50
+  - Reef-safe only toggle
+- **Hover Effects**: Product cards support image hover transitions.
+- **Simulated Loading**: Adds delay on filter apply to simulate async behavior.
+- **Type-Safe Codebase**: Strictly typed props and data with TypeScript interfaces(Currently learning).
+
+---
 
 ## Project Status
 
 **Work in Progress**
 
-Upcoming improvements and planned features:
+Upcoming features:
 
-- Implementing full filtering functionality based on user selections
-- Adding cart management (add/remove products, quantity adjustments)
-- Fetch from mock API to simulate dynamic product data loading (no real backend)
-- Cleaning up CSS file because it's a mess...
+- Cart functionality:
+  - Add/remove items
+  - Quantity adjustments
+  - UI for cart page
+- Persist cart data in local storage
+
+---
+
+## Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/sunsmart-store.git
+cd sunsmart-store
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
