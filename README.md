@@ -2,16 +2,12 @@
 
 **Sunsmart Store** is a fictitious e-commerce frontend app for browsing sunscreen products. Built with **React**, **TypeScript**, and **Vite**, it features a responsive UI, filtering via a drawer, and dynamic product listing behavior.
 
----
-
 ## Tech Stack
 
 - React
 - TypeScript
 - Vite
 - React Router
-
----
 
 ## Features
 
@@ -24,8 +20,6 @@
 - **Simulated Loading**: Adds delay on filter apply to simulate async behavior.
 - **Type-Safe Codebase**: Strictly typed props and data with TypeScript interfaces(Currently learning).
 
----
-
 ## Project Status
 
 **Work in Progress**
@@ -37,8 +31,6 @@ Upcoming features:
   - Quantity adjustments
   - UI for cart page
 - Persist cart data in local storage
-
----
 
 ## Getting Started
 
