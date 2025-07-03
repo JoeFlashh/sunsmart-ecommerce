@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { LuSettings2 } from "react-icons/lu";
-
+import SkeletonCard from "./SkeletonCard";
 import type { Product } from "../data/products";
 import ProductCard from "./ProductCard";
 import FiltersDrawer from "./FiltersDrawer";
@@ -11,156 +11,134 @@ interface ProductsCatalogProps {
 
 function ProductsCatalog({ products }: ProductsCatalogProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // State for filters currently selected in the drawer (temporary)
   const [tempSelectedFilters, setTempSelectedFilters] = useState<{
     [key: string]: string[];
   }>({});
-  // State for filters that are actually applied to the product list
   const [appliedFilters, setAppliedFilters] = useState<{
     [key: string]: string[];
   }>({});
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-
-  // Initialize tempSelectedFilters and appliedFilters with empty objects on mount
-  // This ensures a clean state on initial load
-  useEffect(() => {
-    setTempSelectedFilters({});
-    setAppliedFilters({});
-  }, []);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+  const [isLoading, setIsLoading] = useState(false);
 
   const openDrawer = () => {
-    // When opening, sync temporary filters with the currently applied ones
     setTempSelectedFilters(appliedFilters);
     setIsDrawerOpen(true);
   };
 
-  const closeDrawer = () => {
-    setIsDrawerOpen(false);
-  };
+  const closeDrawer = () => setIsDrawerOpen(false);
 
-  // Effect to handle body scrolling when the drawer is open/closed
   useEffect(() => {
     if (isDrawerOpen) {
-      document.body.style.overflow = "hidden"; // Disable scrolling
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset"; // Enable scrolling
+      document.body.style.overflow = "unset";
     }
-    // Cleanup function to re-enable scrolling if the component unmounts
     return () => {
       document.body.style.overflow = "unset";
     };
   }, [isDrawerOpen]);
 
-  // Function to update tempSelectedFilters based on checkbox changes in the drawer
   const handleTempFilterChange = (
     groupKey: string,
     value: string,
     isChecked: boolean
   ) => {
-    setTempSelectedFilters((prevFilters) => {
-      const currentGroupSelections = prevFilters[groupKey] || [];
+    setTempSelectedFilters((prev) => {
+      const group = prev[groupKey] || [];
       if (isChecked) {
-        // Add the value if it's not already there
-        return {
-          ...prevFilters,
-          [groupKey]: [...new Set([...currentGroupSelections, value])], // Using Set for uniqueness
-        };
+        return { ...prev, [groupKey]: [...new Set([...group, value])] };
       } else {
-        // Remove the value
-        return {
-          ...prevFilters,
-          [groupKey]: currentGroupSelections.filter((item) => item !== value),
-        };
+        return { ...prev, [groupKey]: group.filter((v) => v !== value) };
       }
     });
   };
 
-  // Clears both temporary and applied filters, then closes the drawer
   const handleClearFilters = () => {
-    setTempSelectedFilters({}); // Clear temporary filters in the drawer
-    setAppliedFilters({}); // Clear applied filters immediately
+    setTempSelectedFilters({});
+    setAppliedFilters({});
+    setFilteredProducts(products);
   };
 
-  // Applies the temporary filters to the main product list and closes the drawer
   const applyFilters = useCallback(() => {
-    setAppliedFilters(tempSelectedFilters);
-    closeDrawer(); // Close the drawer after applying filters
-  }, [tempSelectedFilters]); // Only re-create if tempSelectedFilters changes
+    setIsLoading(true);
+    setIsDrawerOpen(false);
 
-  // Core filtering logic: runs when original products or applied filters change
-  useEffect(() => {
-    let currentFilteredProducts = [...products];
+    setTimeout(() => {
+      setAppliedFilters(tempSelectedFilters);
 
-    // Determine if there are any active filters to apply
-    const hasActiveAppliedFilters = Object.values(appliedFilters).some(
-      (arr) => arr.length > 0
-    );
+      const hasFilters = Object.values(tempSelectedFilters).some(
+        (arr) => arr.length > 0
+      );
 
-    if (hasActiveAppliedFilters) {
-      currentFilteredProducts = products.filter((product) => {
-        // For each product, check if it satisfies ALL currently applied filter groups
-        return Object.entries(appliedFilters).every(([groupKey, values]) => {
-          // If no values are selected for a group, that group doesn't filter anything
-          if (values.length === 0) {
-            return true;
-          }
-
-          // Check the product's property against the selected filter values
-          switch (groupKey) {
-            case "type":
-              return values.some((val) => product.type === val);
-            case "spf":
-              // IMPORTANT: Convert filter value string to number for comparison with product.spf
-              return values.some((val) => product.spf === parseInt(val, 10));
-            case "reef":
-              // 'yes' maps to true, anything else (like no 'yes') maps to false
-              return values.some((val) => product.reefSafe === (val === "yes"));
-            default:
-              // If a filter group key doesn't match, don't filter by it
-              return true;
-          }
+      if (!hasFilters) {
+        setFilteredProducts(products);
+      } else {
+        const filtered = products.filter((product) => {
+          return Object.entries(tempSelectedFilters).every(([key, values]) => {
+            if (values.length === 0) return true;
+            switch (key) {
+              case "type":
+                return values.includes(product.type);
+              case "spf":
+                return values.includes(product.spf.toString());
+              case "reef":
+                return values.includes(product.reefSafe ? "yes" : "no");
+              default:
+                return true;
+            }
+          });
         });
-      });
-    }
-
-    setFilteredProducts(currentFilteredProducts);
-  }, [products, appliedFilters]); // Dependencies: re-run when original products or applied filters change
+        setFilteredProducts(filtered);
+      }
+      setIsLoading(false);
+    }, 500);
+  }, [tempSelectedFilters, products]);
 
   const numberOfProducts = filteredProducts.length;
-
-  // Check if there are any selected filters in the drawer (temporary ones)
   const hasActiveFiltersInDrawer = Object.values(tempSelectedFilters).some(
     (arr) => arr.length > 0
   );
 
   return (
     <div className="products-catalog-container">
+      {/* 1. Filters container with open button and total count */}
       <div className="filters-container">
         <button onClick={openDrawer} className="is-drawer-open-button">
           <LuSettings2 className="filter-icon" />
           Filters
         </button>
         <p>{numberOfProducts} Total</p>
-        <FiltersDrawer
-          isOpen={isDrawerOpen}
-          onClose={closeDrawer}
-          // Pass temporary filters to the drawer so it reflects current selections
-          selectedFilters={tempSelectedFilters}
-          hasActiveFilters={hasActiveFiltersInDrawer}
-          // Drawer updates temporary filters
-          onFilterChange={handleTempFilterChange}
-          onClearFilters={handleClearFilters}
-          // Pass applyFilters to the drawer's "Apply" button
-          onApplyFilters={applyFilters}
-        />
       </div>
+
+      {/* 2. Render drawer and overlay only if open */}
       {isDrawerOpen && (
-        <div className="drawer-overlay" onClick={closeDrawer}></div>
+        <>
+          <div className="drawer-overlay" onClick={closeDrawer}></div>
+          <FiltersDrawer
+            isOpen={isDrawerOpen}
+            onClose={closeDrawer}
+            selectedFilters={tempSelectedFilters}
+            hasActiveFilters={hasActiveFiltersInDrawer}
+            onFilterChange={handleTempFilterChange}
+            onClearFilters={handleClearFilters}
+            onApplyFilters={applyFilters}
+          />
+        </>
       )}
+
+      {/* 3. Products grid */}
       <div className="products-catalog-grid">
-        {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {isLoading ? (
+          Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
+        ) : filteredProducts.length === 0 ? (
+          <p className="no-products-message">
+            No products matching your criteria.
+          </p>
+        ) : (
+          filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        )}
       </div>
     </div>
   );

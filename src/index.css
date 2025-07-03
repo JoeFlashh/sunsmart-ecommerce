@@ -1,3 +1,4 @@
+/* GLOBAL RESET & BASE STYLES */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,12 +7,9 @@
 
 html,
 body {
-  margin: 0;
-  padding: 0;
   font-family: sans-serif;
   color: #333;
   line-height: 1.5;
-  height: 100%;
 }
 
 button {
@@ -24,6 +22,31 @@ input[type="checkbox"] {
   border-radius: 4px;
 }
 
+ul,
+li {
+  list-style-type: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* LAYOUT: SITE CONTAINER */
 /* Keeps footer at the bottom */
 .site-container {
   display: flex;
@@ -34,37 +57,23 @@ input[type="checkbox"] {
   flex-grow: 1;
 }
 
-/* ------------------------------------- */
-
-ul,
-ul li,
-a {
-  list-style-type: none;
-  text-decoration: none;
-  color: inherit;
-}
-
-img {
-  width: 100%;
-  display: block;
-  height: auto;
-}
-
-/*  */
-
-/* ------------- Navbar & Header -------------- */
+/* NAVBAR */
 .navbar-outer-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  /* z-index: 1000; */
+  z-index: 3000; /* higher than drawer (2100) and overlay (2000) */
+
   background-color: #fff;
   border-bottom: 1px solid lightgray;
 }
 
 .navbar-inner-container {
-  z-index: 1000;
+  /* z-index: 1000; */
+  z-index: 3000; /* higher than drawer (2100) and overlay (2000) */
+
   max-width: 1100px;
   margin: 0 auto;
   height: 80px;
@@ -94,11 +103,10 @@ img {
   font-weight: 200;
 }
 
-/* --------------- Hero banner --------------- */
-
+/* HERO BANNER */
 .hero-banner-img-container {
   position: relative;
-  height: 500px;
+  height: 400px;
   overflow: hidden;
   margin-top: 80px;
 }
@@ -135,20 +143,82 @@ img {
   z-index: 1;
 }
 
-/* Main */
-
+/* PRODUCT CATALOG */
 .products-catalog-container {
   max-width: 1100px;
   margin: 0 auto;
 }
 
-/*-------------- Fliters & Sort-------------- */
+.products-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem 1rem;
+}
 
+.no-products-message {
+  grid-column: 1 / -1; /* Make the message span all columns */
+  padding: 2rem;
+  text-align: center;
+  font-style: italic;
+}
+
+.product-card-image-container {
+  position: relative;
+  aspect-ratio: 3/4;
+  width: 100%;
+}
+.product-card-image-container img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+.hover-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.product-card-image-container:hover .hover-image {
+  opacity: 1;
+}
+
+.product-card-info-container {
+  padding: 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+  /* text-align: center; */
+  gap: 0.75rem;
+}
+
+.add-to-cart-button {
+  color: inherit;
+  padding: 0.75rem 0rem;
+  font-size: inherit;
+  font-weight: bold;
+  width: 100%;
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* FILTERS */
 .filters-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 0rem;
+  padding: 1rem 0rem;
+  position: sticky;
+  top: 80px;
+  z-index: 100; /* Lower than drawer and overlay */
+  background-color: white; /* To prevent transparency issues */
 }
 
 .is-drawer-open-button {
@@ -213,18 +283,18 @@ img {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 400;
+  z-index: 2000;
 }
 .filters-drawer {
   position: fixed;
   top: 80px;
   left: 0;
-  min-height: 100vh;
   width: 350px;
-  z-index: 500;
+  min-height: 100vh;
   background-color: #fff;
   transform: translateX(-100%);
   transition: transform 0.3s ease;
+  z-index: 2100; /* Above overlay */
 }
 .filters-drawer.open {
   transform: translateX(0);
@@ -305,67 +375,56 @@ img {
   color: #fff;
 }
 
-/*---------------- Products container ---------------- */
-
-.products-catalog-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem 1rem;
-}
-
-.product-card-image-container {
-  position: relative;
-  aspect-ratio: 3/4;
+/* SKELETON LOADERS */
+.skeleton-image {
   width: 100%;
+  aspect-ratio: 3 / 4;
+  background-color: #e5e7eb;
 }
-.product-card-image-container img {
-  object-fit: cover;
-  height: 100%;
+
+.skeleton-line,
+.skeleton-name,
+.skeleton-text,
+.skeleton-price,
+.skeleton-button {
+  background-color: #e5e7eb;
+  border-radius: 4px;
+}
+
+.skeleton-line {
+  height: 16px;
+}
+
+.skeleton-name {
+  width: 70%;
+  height: 20px;
+}
+
+.skeleton-text {
+  width: 50%;
+}
+
+.skeleton-price {
+  width: 30%;
+  height: 18px;
+}
+
+.skeleton-button {
   width: 100%;
-  display: block;
+  height: 40px;
+  margin-top: 0.5rem;
 }
-.hover-image {
+
+/* CART PAGE */
+
+.cart-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.product-card-image-container:hover .hover-image {
-  opacity: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.product-card-info-container {
-  padding: 1rem 0rem;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  gap: 0.75rem;
-}
-
-.add-to-cart-button {
-  color: inherit;
-  padding: 0.75rem 0rem;
-  font-size: inherit;
-  font-weight: bold;
-  width: 100%;
-  display: inline-block;
-  background-color: transparent;
-  border: 1px solid #333;
-  transition: all 0.3s ease;
-}
-
-.add-to-cart-button:hover {
-  background-color: #333;
-  color: #fff;
-}
-
-/*-------------- Cart page-------------- */
-
-.cart {
-  margin-top: 100px;
-}
-
+/* FOOTER */
 /* Footer sticks to bottom w/ margin 0 auto relative to site-container & site-content in index.css */
 .footer-container {
   text-align: center;
@@ -373,8 +432,7 @@ img {
   padding: 4rem 0rem 0.5rem 0rem;
 }
 
-/*---------------- Media queries -----------------*/
-
+/* MEDIA QUERIES */
 @media (max-width: 1120px) {
   .navbar-inner-container {
     padding: 0rem 1rem;
@@ -391,16 +449,9 @@ img {
   }
 
   .filters-container {
-    position: relative;
-    max-height: none;
     overflow: visible;
-    border-right: none;
     padding-right: 0;
     width: 100%;
-  }
-
-  .sort-select-button {
-    width: 150px;
   }
 
   .products-catalog-container {
@@ -410,7 +461,7 @@ img {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .grid-start {
+  /* .grid-start {
     align-self: start;
-  }
+  } */
 }

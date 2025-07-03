@@ -1,7 +1,7 @@
 function CartPage() {
   return (
-    <div className="cart">
-      <h1>CART</h1>;
+    <div className="cart-container">
+      <h1>Coming soon...</h1>
     </div>
   );
 }
